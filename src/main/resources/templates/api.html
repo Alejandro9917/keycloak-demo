@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="img/itm.png" type="image/gif" sizes="16x16">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <title>ITM - Keycloak</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/logout">Logout</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/user">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/api">API</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div id="dataApi">
+                
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        /* $(document).ready(function() {
+          getKey();
+        });
+  
+        function getKey(){
+          $.ajax({
+            url: "https://api-bb-dev.apps.ocp4-test.itmlabs.io/?user_key=86f797ef7e49cdd9b61825129caf8799",
+            method: "GET",
+            success: function(data){
+                console.log(data);
+            },
+            async: false,
+          }).done(function(res){
+            //var response = res;
+            //var response = $.parseJSON(res);
+            //console.log(res);
+            //printData(res);
+            //printData(response);
+          });
+        }*/
+
+
+        function printData(data){
+            /* data.map(function(item){
+                $("#dataApi").append(item);   
+            }); */
+            $("#dataApi").append(data); 
+        }
+
+        function xhrSuccess() {
+            this.callback.apply(this, this.arguments);
+        }
+
+        function xhrError() {
+            console.error(this.statusText);
+        }
+
+        function loadFile(url, callback /*, opt_arg1, opt_arg2, ... */) {
+            var xhr = new XMLHttpRequest();
+            xhr.callback = callback;
+            xhr.arguments = Array.prototype.slice.call(arguments, 2);
+            xhr.onload = xhrSuccess;
+            xhr.onerror = xhrError;
+            xhr.open("GET", url, true);
+            xhr.send(null);
+        }
+
+        function showMessage(message) {
+            //var response = $.parseJSON(this.responseText);
+            //printData(this.responseText);
+            //const obj = JSON.stringify(this.responseText, null, 5);
+            obj = this.responseText.replace(/,/g, ",<br>")
+            //const jsonObj = JSON.parse(this.responseText);
+            console.log(obj);
+            printData(obj);
+        }
+
+        loadFile("{endpoint}", showMessage, "");
+    </script>
+  </body>
+</html>
